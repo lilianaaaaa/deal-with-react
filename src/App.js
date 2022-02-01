@@ -23,11 +23,24 @@
 // }
 
 // export default App;
+///////////////////////////////////////////////////
+// import MyComponent from "./MyComponent";
 
-import MyComponent from "./MyComponent";
+// const App = () => {
+//   return <MyComponent name="React" favoriteNumber={1}>Liliana</MyComponent>; 
+// };
+
+///////////////////////////////////////////////////
+// import Counter from './Counter';
+
+// const App = () => {
+//   return <Counter/>; 
+// };
+
+import Say from './Say';
 
 const App = () => {
-  return <MyComponent name="React" favoriteNumber={1}>Liliana</MyComponent>; 
+  return <Say />
 };
 
 export default App;
