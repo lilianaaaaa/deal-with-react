@@ -47,10 +47,20 @@ const App = () => {
     [todos],
   );
 
+  const onToggle = useCallback(
+    id => {
+      setTodos(
+        todos.map(todo =>  
+          todo.id === id ? { ...todo, checked: !todo.checked } : todo, 
+        ),//todo.id와 현재 파라미터로 사용된 id값이 같을때는 정해준 규칙대로 새로운 객체를 생성하지만, id값이 다를때는 변화를 주지 않고 처음 받아왔던 상태 그대로 반환
+      );
+    },
+    [todos],
+  )
   return( 
   <TodoTemplate>
     <TodoInsert onInsert={onInsert}/>
-    <TodoList todos={todos} onRemove={onRemove}/>
+    <TodoList todos={todos} onRemove={onRemove} onToggle={onToggle}/>
   </TodoTemplate>
   );
 };
