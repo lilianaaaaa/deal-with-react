@@ -1,5 +1,7 @@
+import {useState, useEffect} from 'react';
 import styled from 'styled-components';
 import NewsItem from './NewsItem';
+import axios from 'axios';
 
 const NewsListBlock = styled.div`
   box-sizing: border-box;
@@ -14,23 +16,38 @@ const NewsListBlock = styled.div`
   }
 `;
 
-const sampleArticle = {
-    title: 'title',
-    description: 'contents',
-    url: 'https://google.com',
-    urlToImage: 'https://via.placeholder.com/160',
-};
-
 const NewsList = () => {
+    const [articles, setArticles] = useState(null);
+    const [loading, setLoading] = useState(false);
+
+    useEffect(() => {
+        const fetchData = async() =>{
+            setLoading(true);
+        try{
+            const response = await axios.get('https://newsapi.org/v2/top-headlines?country=kr&category=sports&apiKey=01e8ff68ce2349adaf8e4257d847807e',
+            );
+            setArticles(response.data.articles);
+        }catch(e){
+            console.log(e);
+        }
+        setLoading(false);
+        };
+        fetchData();
+    },[]);
+
+    if(loading){
+        return <NewsListBlock>loading...</NewsListBlock>;
+    }
+
+    if(!articles){
+        return null;
+    }
+
     return (
         <NewsListBlock>
-            <NewsItem article={sampleArticle}/>
-            <NewsItem article={sampleArticle}/>
-            <NewsItem article={sampleArticle}/>
-            <NewsItem article={sampleArticle}/>
-            <NewsItem article={sampleArticle}/>
-            <NewsItem article={sampleArticle}/>
-            <NewsItem article={sampleArticle}/>
+            {articles.map(article => (
+                <NewsItem key={article.url} article={article}/>                
+            ))}
         </NewsListBlock>
     );
 };
