@@ -34,15 +34,23 @@ const App = () => {
         text,
         checked: false,
       };
-      setTodos(todo.concat(todo));
+      setTodos(todos.concat(todo));
       nextId.current += 1; //nextId 1씩 더하기
     },
     [todos],
   );
+
+  const onRemove = useCallback(
+    id => {
+      setTodos(todos.filter(todo => todo.id !== id));
+    },
+    [todos],
+  );
+
   return( 
   <TodoTemplate>
     <TodoInsert onInsert={onInsert}/>
-    <TodoList todos={todos}/>
+    <TodoList todos={todos} onRemove={onRemove}/>
   </TodoTemplate>
   );
 };
