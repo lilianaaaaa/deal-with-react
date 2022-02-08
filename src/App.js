@@ -1,7 +1,8 @@
 import {Route, Link} from 'react-router-dom';
 import About from './About';
 import Home from './Home';
-import Profile from './Profile';
+//import Profile from './Profile';
+import Profiles from './Profiles';
 
 const App = () => {
   return (
@@ -14,17 +15,14 @@ const App = () => {
           <Link to="/about">About</Link>
         </li>
         <li>
-          <Link to="/profile/liliana">liliana profile</Link>
-        </li>
-        <li>
-          <Link to="/profile/benny">benny profile</Link>
+          <Link to="/profiles">Profiles</Link>
         </li>
       </ul>
       <hr/>
       {/* 현재 경로에 따라 다른 컴포넌트 보여주기 */}
       <Route path="/" component={Home} exact={true}/> 
       <Route path={['/about', '/info']} component={About}/>
-      <Route path="/profile/:username" component={Profile}/>
+      <Route path="/profiles" component={Profiles}/>
     </div>
   );
 };
