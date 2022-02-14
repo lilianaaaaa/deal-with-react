@@ -3,28 +3,24 @@ import TodoTemplate from "./components/TodoTemplate";
 import TodoInsert from "./components/TodoInsert";
 import TodoList from "./components/TodoList";
 
+//많은 데이터 렌더링하기
+function createBulkTodos(){
+  const array = [];
+  for(let i = 1; i <= 2500; i++){
+    array.push({
+      id: i,
+      text: `할 일 ${i}`,
+      checked: false,
+    });
+  }
+  return array;
+}
 const App = () => {
-  const [todos, setTodos] = useState([
-    {
-      id: 1,
-      text: 'react basic',
-      checked: true,
-    },
-    {
-      id: 2,
-      text: 'component styling',
-      checked: true,
-    },
-    {
-      id: 3,
-      text: 'Todo app',
-      checked: true,
-    }
-  ]); //todos array -> TodoList props
+  const [todos, setTodos] = useState(createBulkTodos); //todos array -> TodoList props
 
   //고유값으로 사용될 id
   //ref 사용하여 변수 담기: id값은 렌더링되는 정보가 아니기 때문
-  const nextId = useRef(4);
+  const nextId = useRef(2501);
 
   //컴포넌트의 성능 아낄수 있도록 useCallback으로 감싼다.
   const onInsert = useCallback(
