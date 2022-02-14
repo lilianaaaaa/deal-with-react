@@ -30,28 +30,28 @@ const App = () => {
         text,
         checked: false,
       };
-      setTodos(todos.concat(todo));
+      setTodos(todos => todos.concat(todo));//함수형 업데이트: setState를 비동기로 수행할 때 값을 전달하는 대신 최신의 state와 함께 함수를 전달
       nextId.current += 1; //nextId 1씩 더하기
     },
-    [todos],
+    [],
   );
 
   const onRemove = useCallback(
     id => {
-      setTodos(todos.filter(todo => todo.id !== id));
+      setTodos(todos => todos.filter(todo => todo.id !== id));
     },
-    [todos],
+    [],
   );
 
   const onToggle = useCallback(
     id => {
-      setTodos(
+      setTodos(todos =>
         todos.map(todo =>  
           todo.id === id ? { ...todo, checked: !todo.checked } : todo, 
         ),//todo.id와 현재 파라미터로 사용된 id값이 같을때는 정해준 규칙대로 새로운 객체를 생성하지만, id값이 다를때는 변화를 주지 않고 처음 받아왔던 상태 그대로 반환
       );
     },
-    [todos],
+    [],
   )
   return( 
   <TodoTemplate>
