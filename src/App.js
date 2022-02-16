@@ -1,14 +1,14 @@
 import ColorBox from "./components/ColorBox";
-import ColorContext from "./contexts/color";
+import { ColorProvider } from "./contexts/color";
 
 const App = () => {
   return (
     /* Provider 사용: value값 반드시 명시해주어야 함. */
-    <ColorContext.Provider value={{color: 'red'}}>
+    <ColorProvider>
       <div>
         <ColorBox/>
       </div>
-    </ColorContext.Provider>
+    </ColorProvider>
   );
 };
 
